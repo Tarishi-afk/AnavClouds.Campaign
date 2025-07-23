@@ -1,0 +1,11 @@
+pandas
+openpyxl
+gspread
+oauth2client
+pytz
+apscheduler
+sendgrid
+pytracking
+lxml
+streamlit
+openai

@@ -55,7 +55,7 @@ st.title("📧 Campaign Manager")
 
 with st.sidebar:
     # 1) Which campaign-state workbook?
-    campaign_state = st.text_input("Campaign State workbook", key="campaign_state")
+    campaign_state = "Test_campaign_state"
 
     # 2) Load all rows from that sheet, if provided
     state_rows = []

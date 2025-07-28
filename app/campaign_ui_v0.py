@@ -34,9 +34,20 @@ client = AzureOpenAI(
     api_version="2024-08-01-preview",
     azure_endpoint=OPEN_AI_ENDPOINT
 )
+def get_gspread_client():
+    creds_json = os.environ.get("GOOGLE_CREDENTIALS_JSON")
+    if not creds_json:
+        raise ValueError("GOOGLE_CREDENTIALS_JSON not set in environment!")
+
+    creds_dict = json.loads(creds_json)
+    credentials = Credentials.from_service_account_info(creds_dict, scopes=[
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ])
+    return gspread.authorize(credentials)
 
 html_body = None
-gc    = gspread.service_account(filename=SERVICE_ACCOUNT)
+gc = get_gspread_client()
 all_zones = pytz.common_timezones
 default_tz = "Asia/Kolkata"
 default_idx = all_zones.index(default_tz) if default_tz in all_zones else 0
@@ -213,17 +224,7 @@ creds_json = os.environ.get("GOOGLE_CREDENTIALS_JSON")
 if not creds_json:
     raise ValueError("GOOGLE_CREDENTIALS_JSON not set in environment!")
 
-def get_gspread_client():
-    creds_json = os.environ.get("GOOGLE_CREDENTIALS_JSON")
-    if not creds_json:
-        raise ValueError("GOOGLE_CREDENTIALS_JSON not set in environment!")
 
-    creds_dict = json.loads(creds_json)
-    credentials = Credentials.from_service_account_info(creds_dict, scopes=[
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive"
-    ])
-    return gspread.authorize(credentials)
 # load senders & clients
 # with open("config\sender_config.json") as f:
 #     SENDERS = json.load(f)

@@ -606,7 +606,7 @@ def send_batch():
             st.session_state.scheduler.shutdown(wait=False)
             st.session_state.campaign_running = False
             # Optionally log a failure row
-            lead_sheet.append_row([fr, to, "Failed", ts])
+            lead_sheet.insert_row([fr, to, "Failed", ts], index=2)
             return
 
         status = "SENT" if ok else "FAILED"

@@ -537,6 +537,7 @@ def send_batch():
             return
 
     html_body = st.session_state.html_body
+    print(f"Html body>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> {html_body}")
     if not st.session_state.get("template_saved", False):
         save_template_for_reference(SHEET_NAME, html_body)
         st.session_state.template_saved = True

@@ -633,13 +633,13 @@ def send_batch():
             col_map = {h: i+1 for i, h in enumerate(headers)}
         lead_sheet.update_cell(sheet_row, col_map["TIMESTAMP"], ts)
         MAILTRACKING_WORKBOOK = "MailTracking"
-        try:
-            sheet_name1_tab = gc.open(MAILTRACKING_WORKBOOK).worksheet(SHEET_NAME2)
-            updated_row = lead_sheet.row_values(sheet_row)
-            sheet_name1_tab.append_row(updated_row)
-            logger.info(f" Mirrored row to {SHEET_NAME2}: {to}")
-        except Exception as e:
-            logger.error(f" Failed to mirror row to {SHEET_NAME2}: {e}")
+        # try:
+        #     sheet_name1_tab = gc.open(MAILTRACKING_WORKBOOK).worksheet(SHEET_NAME2)
+        #     updated_row = lead_sheet.row_values(sheet_row)
+        #     sheet_name1_tab.append_row(updated_row)
+        #     logger.info(f" Mirrored row to {SHEET_NAME2}: {to}")
+        # except Exception as e:
+        #     logger.error(f" Failed to mirror row to {SHEET_NAME2}: {e}")
 
         # Advance pointers
         campaign_flag = (campaign_flag + 1) % NS

@@ -349,22 +349,22 @@ def save_state_to_sheet(sheet_name, new_state):
 
 
 
-
 def load_state_from_sheet(sheet_name):
     try:
         state_sheet = gc.open(camp).worksheet("campaign_state")
-        records = state_sheet.get_all_records()
+        records     = state_sheet.get_all_records()
         for row in records:
             if row["SHEET_NAME"] == sheet_name:
+                # pull and decrement, floor at 0
+                saved = int(row.get("campaign_row_state", 0))
                 return {
-                    "campaign_row_state": int(row.get("campaign_row_state", 0)),  #
-                    "campaign_flag": int(row.get("campaign_flag", 0))
+                    "campaign_row_state": max(saved - 1, 0),
+                    "campaign_flag":      int(row.get("campaign_flag", 0))
                 }
     except Exception as e:
         logger.warning("Couldn't load state from sheet: %s", e)
 
     return {"campaign_row_state": 0, "campaign_flag": 0}
-
 
 
 state = load_state_from_sheet(SHEET_NAME)

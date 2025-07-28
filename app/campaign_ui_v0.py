@@ -215,7 +215,7 @@ sh, sm = start_time.hour, start_time.minute
 eh, em = end_time.hour,   end_time.minute
 START = dt_time(sh, sm)
 END   = dt_time(eh, em)
-TEMPLATE_PATH = os.path.join("templates", selected_template)
+TEMPLATE_PATH = selected_template
 # logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-8s %(message)s", datefmt="%Y-%m-%dT%H:%M:%S%z")
 logger = logging.getLogger()

@@ -69,7 +69,7 @@ with st.sidebar:
     # 3) Pick which row by SHEET_NAME
     sheet_options  = [r["SHEET_NAME"] for r in state_rows]
     selected_sheet = st.selectbox(
-        "Pick campaign (SHEET_NAME)",
+        "Resume Campaign (SHEET NAME)",
         options=[""] + sheet_options,
         key="selected_sheet"
     )
@@ -546,7 +546,7 @@ def send_batch():
     # 5) Send up to batch_size emails
     while sent < batch_size and campaign_row_state < total_rows:
         record    = all_records[campaign_row_state]
-        sheet_row = campaign_row_state + 1  # +2 → header + 0-index
+        sheet_row = campaign_row_state + 2  # +2 → header + 0-index
         campaign_row_state += 1             # advance pointer
 
         status_raw = record.get("STATUS", "").strip().upper()
@@ -606,7 +606,7 @@ def send_batch():
             st.session_state.scheduler.shutdown(wait=False)
             st.session_state.campaign_running = False
             # Optionally log a failure row
-            lead_sheet.insert_row([fr, to, "Failed", ts], index=2)
+            lead_sheet.append_row([fr, to, "Failed", ts])
             return
 
         status = "SENT" if ok else "FAILED"

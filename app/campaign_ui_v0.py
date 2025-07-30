@@ -197,7 +197,7 @@ with st.sidebar:
     )
     footnote = st.text_input(
         "Footnote",
-        value=st.session_state.get("_loaded_note", "This is an automated email."),
+        value=st.session_state.get("_loaded_note", "Looking forward to hearing from you!"),
         key="footnote"
     )
 
